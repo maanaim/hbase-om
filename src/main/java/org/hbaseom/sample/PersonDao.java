@@ -1,10 +1,9 @@
-package com.andersonlfeitosa.framework.bigdata.hbase.om.sample;
+package org.hbaseom.sample;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HConstants;
-
-import com.andersonlfeitosa.framework.bigdata.hbase.om.dao.AbstractHBaseDao;
+import org.hbaseom.dao.AbstractHBaseDao;
 
 public class PersonDao extends AbstractHBaseDao<Person> {
 

@@ -1,10 +1,10 @@
-package com.andersonlfeitosa.framework.bigdata.hbase.om.sample;
+package org.hbaseom.sample;
 
 import java.sql.Date;
 
-import com.andersonlfeitosa.framework.bigdata.hbase.om.annotation.HBaseColumn;
-import com.andersonlfeitosa.framework.bigdata.hbase.om.annotation.HBaseRowKey;
-import com.andersonlfeitosa.framework.bigdata.hbase.om.annotation.HBaseTable;
+import org.hbaseom.annotation.HBaseColumn;
+import org.hbaseom.annotation.HBaseRowKey;
+import org.hbaseom.annotation.HBaseTable;
 
 @HBaseTable(name="VISAO360.CONSOLIDADO_PESSOA")
 public class Person {

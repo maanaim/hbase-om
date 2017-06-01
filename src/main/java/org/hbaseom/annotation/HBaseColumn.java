@@ -1,10 +1,10 @@
-package com.andersonlfeitosa.framework.bigdata.hbase.om.annotation;
+package org.hbaseom.annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.andersonlfeitosa.framework.bigdata.hbase.om.mapper.HBaseFormat;
+import org.hbaseom.mapper.HBaseFormat;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value=ElementType.FIELD)

@@ -1,6 +1,6 @@
-package com.andersonlfeitosa.framework.bigdata.hbase.om.sample;
+package org.hbaseom.sample;
 
-import com.andersonlfeitosa.framework.bigdata.hbase.om.dao.AbstractHBaseDao;
+import org.hbaseom.dao.AbstractHBaseDao;
 
 public class Main {
 

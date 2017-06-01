@@ -1,4 +1,4 @@
-package com.andersonlfeitosa.framework.bigdata.hbase.om.dao;
+package org.hbaseom.dao;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -18,11 +18,10 @@ import org.apache.hadoop.hbase.client.ResultScanner;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.client.Table;
 import org.apache.hadoop.hbase.filter.PrefixFilter;
-
-import com.andersonlfeitosa.framework.bigdata.hbase.om.annotation.HBaseColumn;
-import com.andersonlfeitosa.framework.bigdata.hbase.om.annotation.HBaseRowKey;
-import com.andersonlfeitosa.framework.bigdata.hbase.om.annotation.HBaseTable;
-import com.andersonlfeitosa.framework.bigdata.hbase.om.mapper.HBaseConversor;
+import org.hbaseom.annotation.HBaseColumn;
+import org.hbaseom.annotation.HBaseRowKey;
+import org.hbaseom.annotation.HBaseTable;
+import org.hbaseom.mapper.HBaseConversor;
 
 public abstract class AbstractHBaseDao<E> {
 

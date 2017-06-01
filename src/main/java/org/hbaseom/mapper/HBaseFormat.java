@@ -1,4 +1,4 @@
-package com.andersonlfeitosa.framework.bigdata.hbase.om.mapper;
+package org.hbaseom.mapper;
 
 public enum HBaseFormat {
   
