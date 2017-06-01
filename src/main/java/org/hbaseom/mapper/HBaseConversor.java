@@ -7,8 +7,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.hadoop.hbase.util.Bytes;
+import org.apache.log4j.Logger;
 
 public class HBaseConversor {
+  
+  private static final Logger LOGGER = Logger.getLogger(HBaseConversor.class);
   
   public static String convertBytesToString(byte[] value) {
     return value == null ? null : Bytes.toString(value);
@@ -37,7 +40,7 @@ public class HBaseConversor {
       try {
         newDate = df.parse(dataTxt);
       } catch (ParseException e) {
-        e.printStackTrace();
+        LOGGER.fatal("Cannot convert date!", e);
       }
     }
     return newDate;
@@ -51,7 +54,7 @@ public class HBaseConversor {
       try {
         newDate = df.parse(dataTxt);
       } catch (ParseException e) {
-        e.printStackTrace();
+        LOGGER.fatal("Cannot convert datetime!", e);
       }
     }
     return newDate;

@@ -40,10 +40,17 @@ public class Main {
 //    System.out.println(myList);
 //    System.out.println(xpto);
     
+    long t = System.currentTimeMillis();
     AbstractHBaseDao<Person> dao = new PersonDao();
+    System.out.println(System.currentTimeMillis() - t);
     
-    System.out.println(dao.getByKey("08714530457"));
+    t = System.currentTimeMillis();
+    System.out.println(dao.getByKey("00000155000128-128849-9"));
+    System.out.println(System.currentTimeMillis() - t);
     
+    t = System.currentTimeMillis();
+    System.out.println(dao.search("00000155000128"));
+    System.out.println(System.currentTimeMillis() - t);
     
   }
 }

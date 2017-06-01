@@ -18,12 +18,15 @@ import org.apache.hadoop.hbase.client.ResultScanner;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.client.Table;
 import org.apache.hadoop.hbase.filter.PrefixFilter;
+import org.apache.log4j.Logger;
 import org.hbaseom.annotation.HBaseColumn;
 import org.hbaseom.annotation.HBaseRowKey;
 import org.hbaseom.annotation.HBaseTable;
 import org.hbaseom.mapper.HBaseConversor;
 
 public abstract class AbstractHBaseDao<E> {
+  
+  private static final Logger LOGGER = Logger.getLogger(AbstractHBaseDao.class);
 
   private Connection connection;
   
@@ -32,12 +35,16 @@ public abstract class AbstractHBaseDao<E> {
   final Class<E> typeParameterClass;
 
   public AbstractHBaseDao(Class<E> typeParameterClass) {
+    long timeToConnection = System.currentTimeMillis();
     this.typeParameterClass = typeParameterClass;
     try {
       this.connection = ConnectionFactory.createConnection(getConfiguration());
       table = connection.getTable(TableName.valueOf(getTableName()));
+      Get getByKey = new Get(HBaseConversor.convertStringToBytes("key"));
+      table.get(getByKey);
+      LOGGER.debug("Time wasted to connection: " + (System.currentTimeMillis()-timeToConnection));
     } catch (IOException e) {
-      e.printStackTrace();
+      LOGGER.fatal("Cannot open connection!", e);
     }
   }
   
@@ -54,7 +61,7 @@ public abstract class AbstractHBaseDao<E> {
         objects.add(creteEntity(result));
       });
     } catch (IOException e) {
-      e.printStackTrace();
+      LOGGER.fatal("Cannot open connection!", e);
     }
     
     return objects;
@@ -105,7 +112,7 @@ public abstract class AbstractHBaseDao<E> {
       return typeGeneric;
       
     } catch (InstantiationException | IllegalAccessException e) {
-      e.printStackTrace();
+      LOGGER.fatal("Cannot open connection!", e);
     }
     
     return null;
@@ -129,7 +136,7 @@ public abstract class AbstractHBaseDao<E> {
       Result result = table.get(getByKey);
       return creteEntity(result);
     } catch (IOException e) {
-      e.printStackTrace();
+      LOGGER.fatal("Cannot open connection!", e);
     }
     
     return null;
