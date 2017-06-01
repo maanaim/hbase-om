@@ -1,19 +1,11 @@
-package org.hbaseom.annotation;
+package io.github.andersonlf.hbaseom.annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.hbaseom.mapper.HBaseFormat;
-
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value=ElementType.FIELD)
-public @interface HBaseColumn {
+public @interface HBaseRowKey {
 
-  String family();
-  
-  String qualifier();
-  
-  HBaseFormat format() default HBaseFormat.DEFAULT;
-  
 }

@@ -1,4 +1,4 @@
-package org.hbaseom.dao;
+package io.github.andersonlf.hbaseom.dao;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -19,10 +19,11 @@ import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.client.Table;
 import org.apache.hadoop.hbase.filter.PrefixFilter;
 import org.apache.log4j.Logger;
-import org.hbaseom.annotation.HBaseColumn;
-import org.hbaseom.annotation.HBaseRowKey;
-import org.hbaseom.annotation.HBaseTable;
-import org.hbaseom.mapper.HBaseConversor;
+
+import io.github.andersonlf.hbaseom.annotation.HBaseColumn;
+import io.github.andersonlf.hbaseom.annotation.HBaseRowKey;
+import io.github.andersonlf.hbaseom.annotation.HBaseTable;
+import io.github.andersonlf.hbaseom.mapper.HBaseConversor;
 
 public abstract class AbstractHBaseDao<E> {
   

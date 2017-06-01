@@ -2,7 +2,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>hbase-om</groupId>
+  <groupId>io.github.andersonlf</groupId>
   <artifactId>hbase-om</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <name>HBase Object Mapper</name>
@@ -11,9 +11,22 @@
     [2] define 'Data Access Object' classes for random access of HBase rows.
   </description>
   <url>https://github.com/andersonlf/hbase-om</url>
+
+  <developers>
+    <developer>
+      <name>Anderson Lobo Feitosa</name>
+      <email>andersonlf@gmail.com</email>
+      <organization>Anderson Lobo Feitosa</organization>
+      <organizationUrl>http://andersonlfeitosa.com</organizationUrl>
+    </developer>
+  </developers>
+
   <scm>
+    <connection>scm:git:git://github.com/andersonlf/hbase-om.git</connection>
+    <developerConnection>scm:git:ssh://github.com:andersonlf/hbase-om.git</developerConnection>
     <url>https://github.com/andersonlf/hbase-om</url>
   </scm>
+
   <licenses>
     <license>
       <name>GNU General Public License, Version 3.0</name>
@@ -69,16 +82,30 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
   <dependencies>
-    <!-- apache phoenix: jdbc driver 
-    <dependency>
+    <!-- apache phoenix: jdbc driver
+      <dependency>
       <groupId>org.apache.phoenix</groupId>
       <artifactId>phoenix</artifactId>
       <version>4.4.0.2.4.2.0-258</version>
-    </dependency>
+      </dependency>
     -->
     <dependency>
       <groupId>org.apache.hbase</groupId>
@@ -88,6 +115,10 @@
   </dependencies>
 
   <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
     <repository>
       <id>ossrh</id>
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>

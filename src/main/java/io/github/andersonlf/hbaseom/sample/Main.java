@@ -1,6 +1,6 @@
-package org.hbaseom.sample;
+package io.github.andersonlf.hbaseom.sample;
 
-import org.hbaseom.dao.AbstractHBaseDao;
+import io.github.andersonlf.hbaseom.dao.AbstractHBaseDao;
 
 public class Main {
 
