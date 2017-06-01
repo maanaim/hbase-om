@@ -1,22 +1,49 @@
-# Compiled class file
+#####
+### BINARIES
+#####
+*.com
 *.class
+*.dll
+*.exe
+*.o
+*.so
 
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
+#####
+### PACKAGES
+#####
+*.7z
+*.dmg
+*.gz
+*.iso
 *.jar
-*.war
-*.ear
-*.zip
-*.tar.gz
 *.rar
+*.tar
+*.zip
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+#####
+### LOGS AND DATABASES
+#####
+*.log
+*.sqlite
+
+#####
+### OS GENERATED FILES
+#####
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+
+#####
+### JAVA AND IDE
+#####
+.classpath
+.groovy/
+.project
+.settings/
+.idea/
+*.iml
+logs/
+target/
+/bin/
+.springBeans
