@@ -23,7 +23,7 @@
 
   <scm>
     <connection>scm:git:git://github.com/andersonlf/hbase-om.git</connection>
-    <developerConnection>scm:git:ssh://github.com:andersonlf/hbase-om.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:andersonlf/hbase-om.git</developerConnection>
     <url>https://github.com/andersonlf/hbase-om</url>
   </scm>
 
@@ -96,17 +96,31 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>oss.sonatype.org</serverId>
+          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <description>${project.version}</description>
+        </configuration>
+        <executions>
+          <execution>
+            <id>deploy-to-sonatype</id>
+            <phase>deploy</phase>
+            <goals>
+              <goal>deploy</goal>
+              <goal>release</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
   <dependencies>
-    <!-- apache phoenix: jdbc driver
-      <dependency>
-      <groupId>org.apache.phoenix</groupId>
-      <artifactId>phoenix</artifactId>
-      <version>4.4.0.2.4.2.0-258</version>
-      </dependency>
-    -->
     <dependency>
       <groupId>org.apache.hbase</groupId>
       <artifactId>hbase-client</artifactId>
