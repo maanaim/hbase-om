@@ -2,7 +2,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>io.github.andersonlf</groupId>
+  <groupId>io.github.maanaim</groupId>
   <artifactId>hbase-om</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <name>HBase Object Mapper</name>
@@ -10,21 +10,21 @@
     [1] convert objects of your bean-like classes to HBase rows.
     [2] define 'Data Access Object' classes for random access of HBase rows.
   </description>
-  <url>https://github.com/andersonlf/hbase-om</url>
+  <url>https://github.com/maanaim/hbase-om</url>
 
   <developers>
     <developer>
       <name>Anderson Lobo Feitosa</name>
       <email>andersonlf@gmail.com</email>
-      <organization>Anderson Lobo Feitosa</organization>
-      <organizationUrl>http://andersonlfeitosa.com</organizationUrl>
+      <organization>Maanaim Software</organization>
+      <organizationUrl>https://maanaim.github.io</organizationUrl>
     </developer>
   </developers>
 
   <scm>
-    <connection>scm:git:git://github.com/andersonlf/hbase-om.git</connection>
-    <developerConnection>scm:git:git@github.com:andersonlf/hbase-om.git</developerConnection>
-    <url>https://github.com/andersonlf/hbase-om</url>
+    <connection>scm:git:git://github.com/maanaim/hbase-om.git</connection>
+    <developerConnection>scm:git:git@github.com:maanaim/hbase-om.git</developerConnection>
+    <url>https://github.com/maanaim/hbase-om</url>
   </scm>
 
   <licenses>
