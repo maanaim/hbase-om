@@ -24,6 +24,7 @@ import io.github.maanaim.hbaseom.annotation.HBaseColumn;
 import io.github.maanaim.hbaseom.annotation.HBaseRowKey;
 import io.github.maanaim.hbaseom.annotation.HBaseTable;
 import io.github.maanaim.hbaseom.mapper.HBaseConversor;
+import io.github.maanaim.hbaseom.mapper.HBaseFormat;
 
 public abstract class AbstractHBaseDao<E> {
   
@@ -100,7 +101,11 @@ public abstract class AbstractHBaseDao<E> {
           } else if (field.getType().getName().equalsIgnoreCase(BigDecimal.class.getName())) {
             d = HBaseConversor.convertBytesToBigDecimal(value);
           } else if (field.getType().getName().equalsIgnoreCase(Date.class.getName())) {
-            d = HBaseConversor.convertBytesToDate(value);
+            if (hbaseAnnotation.format().equals(HBaseFormat.DATETIME)) {
+              d = HBaseConversor.convertBytesToDateTime(value);
+            } else {
+              d = HBaseConversor.convertBytesToDate(value);
+            }
           }
         }
 
