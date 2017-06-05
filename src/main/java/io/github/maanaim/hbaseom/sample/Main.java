@@ -1,6 +1,6 @@
-package io.github.andersonlf.hbaseom.sample;
+package io.github.maanaim.hbaseom.sample;
 
-import io.github.andersonlf.hbaseom.dao.AbstractHBaseDao;
+import io.github.maanaim.hbaseom.dao.AbstractHBaseDao;
 
 public class Main {
 

@@ -1,4 +1,4 @@
-package io.github.andersonlf.hbaseom.mapper;
+package io.github.maanaim.hbaseom.mapper;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;

@@ -1,12 +1,12 @@
-package io.github.andersonlf.hbaseom.sample;
+package io.github.maanaim.hbaseom.sample;
 
 import java.math.BigDecimal;
 import java.sql.Date;
 
-import io.github.andersonlf.hbaseom.annotation.HBaseColumn;
-import io.github.andersonlf.hbaseom.annotation.HBaseRowKey;
-import io.github.andersonlf.hbaseom.annotation.HBaseTable;
-import io.github.andersonlf.hbaseom.mapper.HBaseFormat;
+import io.github.maanaim.hbaseom.annotation.HBaseColumn;
+import io.github.maanaim.hbaseom.annotation.HBaseRowKey;
+import io.github.maanaim.hbaseom.annotation.HBaseTable;
+import io.github.maanaim.hbaseom.mapper.HBaseFormat;
 
 @HBaseTable(name="VISAO360.CONSOLIDADO_CONTRATO")
 public class Person {

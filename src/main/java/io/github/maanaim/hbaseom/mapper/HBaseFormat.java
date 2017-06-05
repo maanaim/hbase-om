@@ -1,4 +1,4 @@
-package io.github.andersonlf.hbaseom.mapper;
+package io.github.maanaim.hbaseom.mapper;
 
 public enum HBaseFormat {
   

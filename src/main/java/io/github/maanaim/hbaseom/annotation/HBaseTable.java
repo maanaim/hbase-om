@@ -1,4 +1,4 @@
-package io.github.andersonlf.hbaseom.annotation;
+package io.github.maanaim.hbaseom.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

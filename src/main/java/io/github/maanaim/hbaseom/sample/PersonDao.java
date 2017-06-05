@@ -1,10 +1,10 @@
-package io.github.andersonlf.hbaseom.sample;
+package io.github.maanaim.hbaseom.sample;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HConstants;
 
-import io.github.andersonlf.hbaseom.dao.AbstractHBaseDao;
+import io.github.maanaim.hbaseom.dao.AbstractHBaseDao;
 
 public class PersonDao extends AbstractHBaseDao<Person> {
 
