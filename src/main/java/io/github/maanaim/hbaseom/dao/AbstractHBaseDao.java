@@ -8,10 +8,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.hbase.TableName;
-import org.apache.hadoop.hbase.client.Connection;
-import org.apache.hadoop.hbase.client.ConnectionFactory;
 import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
@@ -23,6 +19,7 @@ import org.apache.log4j.Logger;
 import io.github.maanaim.hbaseom.annotation.HBaseColumn;
 import io.github.maanaim.hbaseom.annotation.HBaseRowKey;
 import io.github.maanaim.hbaseom.annotation.HBaseTable;
+import io.github.maanaim.hbaseom.exception.DataAccessObjectException;
 import io.github.maanaim.hbaseom.mapper.HBaseConversor;
 import io.github.maanaim.hbaseom.mapper.HBaseFormat;
 
@@ -30,48 +27,61 @@ public abstract class AbstractHBaseDao<E> {
   
   private static final Logger LOGGER = Logger.getLogger(AbstractHBaseDao.class);
 
-  private Connection connection;
-  
   private Table table;
   
   final Class<E> typeParameterClass;
-
+  
   public AbstractHBaseDao(Class<E> typeParameterClass) {
-    long timeToConnection = System.currentTimeMillis();
     this.typeParameterClass = typeParameterClass;
-    try {
-      this.connection = ConnectionFactory.createConnection(getConfiguration());
-      table = connection.getTable(TableName.valueOf(getTableName()));
-      Get getByKey = new Get(HBaseConversor.convertStringToBytes("key"));
-      table.get(getByKey);
-      LOGGER.debug("Time wasted to connection: " + (System.currentTimeMillis()-timeToConnection));
-    } catch (IOException e) {
-      LOGGER.fatal("Cannot open connection!", e);
-    }
   }
   
-  public abstract Configuration getConfiguration();
+  public Table getTable() throws DataAccessObjectException {
+    if (this.table == null) {
+      throw new DataAccessObjectException("Table was not configured.");
+    }
+    
+    return table;
+  }
+
+  public void setTable(Table table) {
+    this.table = table;
+  }
   
-  public List<E> search(String prefixKey) {
+  public E getByKey(String key) throws DataAccessObjectException {
+    E object = null;
+    try {
+      Get getByKey = new Get(HBaseConversor.convertStringToBytes(key));
+      Result result = getTable().get(getByKey);
+      object = createEntity(result);
+    } catch (IOException e) {
+      throw new DataAccessObjectException(e);
+    }
+    
+    return object;
+  }
+  
+  public List<E> search(String prefixKey) throws DataAccessObjectException {
     List<E> objects = new ArrayList<E>();
     try {
       Scan scan = new Scan();
       PrefixFilter prefixFilter = new PrefixFilter(HBaseConversor.convertStringToBytes(prefixKey));
       scan.setFilter(prefixFilter);
-      ResultScanner resultScanner = table.getScanner(scan);
+      ResultScanner resultScanner = getTable().getScanner(scan);
       resultScanner.forEach( result -> {
-        objects.add(creteEntity(result));
+        objects.add(createEntity(result));
       });
     } catch (IOException e) {
-      LOGGER.fatal("Cannot open connection!", e);
+      throw new DataAccessObjectException(e);
     }
     
     return objects;
   }
   
-  private E creteEntity(Result result) {
+  private E createEntity(Result result) {
+    E typeGeneric = null;
+    
     try {
-      E typeGeneric = typeParameterClass.newInstance();
+      typeGeneric = typeParameterClass.newInstance();
       for (Field field : typeParameterClass.getDeclaredFields()) {
         
         Object d = null;
@@ -115,15 +125,15 @@ public abstract class AbstractHBaseDao<E> {
         field.setAccessible(accessible);
       }
       
-      return typeGeneric;
-      
     } catch (InstantiationException | IllegalAccessException e) {
-      LOGGER.fatal("Cannot open connection!", e);
+      LOGGER.fatal("Cannot create entity!", e);
     }
     
-    return null;
+    return typeGeneric;
   }
 
+  @SuppressWarnings("unused")
+  // TODO Temporariamente inutilizado após mudança de estratégia 
   private String getTableName() {
     String tableName = null;
     
@@ -134,18 +144,6 @@ public abstract class AbstractHBaseDao<E> {
     }
     
     return tableName;
-  }
-
-  public E getByKey(String key) {
-    try {
-      Get getByKey = new Get(HBaseConversor.convertStringToBytes(key));
-      Result result = table.get(getByKey);
-      return creteEntity(result);
-    } catch (IOException e) {
-      LOGGER.fatal("Cannot open connection!", e);
-    }
-    
-    return null;
   }
   
 }

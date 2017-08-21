@@ -18,48 +18,70 @@ public class HBaseConversor {
   }
   
   public static Integer convertBytesToInt(byte[] value) {
-    String newValue = convertBytesToString(value);
-    return newValue != null ? Integer.parseInt(newValue) : null;
+    Integer result = null;
+    String txtValue = convertBytesToString(value);
+    if (txtValue != null) {
+      try {
+        result = Integer.parseInt(txtValue);
+      } catch (NumberFormatException e) {
+        LOGGER.warn("Cannot convert '" + txtValue + "' to java.lang.Integer", e);
+      }
+    }
+    
+    return result;
   }
   
   public static Long convertBytesToLong(byte[] value) {
-    String newValue = convertBytesToString(value);
-    return newValue != null ? Long.parseLong(newValue) : null;
+    Long result = null;
+    String txtValue = convertBytesToString(value);
+    if (txtValue != null) {
+      try {
+        result = Long.parseLong(txtValue);
+      } catch (NumberFormatException e) {
+        LOGGER.warn("Cannot convert '" + txtValue + "' to java.lang.Long", e);
+      }
+    }
+    
+    return result;
   }
 
   public static BigDecimal convertBytesToBigDecimal(byte[] value) {
-    String newValue = convertBytesToString(value);
-    return newValue != null ? new BigDecimal(newValue) : null;
-  }
-
-  public static Date convertBytesToDate(byte[] value) {
-    String dataTxt = convertBytesToString(value);
-    Date newDate = null;
-    if (dataTxt != null) {
-      DateFormat df = new SimpleDateFormat(HBaseFormat.DATE.getFormat());
+    BigDecimal result = null;
+    String txtValue = convertBytesToString(value);
+    if (txtValue != null) {
       try {
-        newDate = df.parse(dataTxt);
-      } catch (ParseException e) {
-        LOGGER.fatal("Cannot convert date!", e);
+        result = new BigDecimal(txtValue);
+      } catch (NumberFormatException e) {
+        LOGGER.warn("Cannot convert '" + txtValue + "' to java.math.BigDecimal", e);
       }
     }
-    return newDate;
-  }
-
-  public static Date convertBytesToDateTime(byte[] value) {
-    String dataTxt = convertBytesToString(value);
-    Date newDate = null;
-    if (dataTxt != null) {
-      DateFormat df = new SimpleDateFormat(HBaseFormat.DATETIME.getFormat());
-      try {
-        newDate = df.parse(dataTxt);
-      } catch (ParseException e) {
-        LOGGER.fatal("Cannot convert datetime!", e);
-      }
-    }
-    return newDate;
+    
+    return result;
   }
   
+  public static Date convertBytesToDate(byte[] value) {
+    return convertDate(value, HBaseFormat.DATE);
+  }
+  
+  public static Date convertBytesToDateTime(byte[] value) {
+    return convertDate(value, HBaseFormat.DATETIME);
+  }
+
+  private static Date convertDate(byte[] value, HBaseFormat format) {
+    String txtValue = convertBytesToString(value);
+    Date result = null;
+    if (txtValue != null) {
+      DateFormat dateFormat = new SimpleDateFormat(format.getFormat());
+      try {
+        result = dateFormat.parse(txtValue);
+      } catch (ParseException e) {
+        LOGGER.warn("Cannot convert '" + txtValue + "' to java.util.Date using '" + format.getFormat() + 
+            "' format.", e);
+      }
+    }
+    return result;
+  }
+
   public static byte[] convertStringToBytes(String value) {
     return Bytes.toBytes(value);
   }
