@@ -13,7 +13,6 @@ import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.client.Table;
-import org.apache.hadoop.hbase.filter.PrefixFilter;
 import org.apache.log4j.Logger;
 
 import io.github.maanaim.hbaseom.annotation.HBaseColumn;
@@ -64,10 +63,12 @@ public abstract class AbstractHBaseDao<E> {
     List<E> objects = new ArrayList<E>();
     try {
       Scan scan = new Scan();
-      PrefixFilter prefixFilter = new PrefixFilter(HBaseConversor.convertStringToBytes(prefixKey));
-      scan.setFilter(prefixFilter);
+      scan.setRowPrefixFilter(HBaseConversor.convertStringToBytes(prefixKey));
+      System.out.println(1);
       ResultScanner resultScanner = getTable().getScanner(scan);
+      System.out.println(2);
       resultScanner.forEach( result -> {
+        System.out.println(3);
         objects.add(createEntity(result));
       });
     } catch (IOException e) {
