@@ -64,11 +64,8 @@ public abstract class AbstractHBaseDao<E> {
     try {
       Scan scan = new Scan();
       scan.setRowPrefixFilter(HBaseConversor.convertStringToBytes(prefixKey));
-      System.out.println(1);
       ResultScanner resultScanner = getTable().getScanner(scan);
-      System.out.println(2);
       resultScanner.forEach( result -> {
-        System.out.println(3);
         objects.add(createEntity(result));
       });
     } catch (IOException e) {
