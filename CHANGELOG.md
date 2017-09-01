@@ -9,12 +9,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Travis ci 
 - Javadoc
+- Mask to zip code, e-mail, money
+- Map fields to enum
+
+
+## [1.2.0]
+### Added
 - Unit tests
 - Strategy to create types
-- Mask to zip code, e-mail, money
 - Format string fields by lower, upper, lower camel and upper camel case
-- Map fields to enum
 - Changelog
+
 
 ## [1.1.2] - 2017-08-23
 ### Fixed

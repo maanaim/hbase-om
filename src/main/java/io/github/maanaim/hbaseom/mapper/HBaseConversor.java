@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.log4j.Logger;
@@ -16,13 +18,44 @@ public class HBaseConversor {
   public static String convertBytesToString(byte[] value) {
     return value == null ? null : Bytes.toString(value);
   }
+
+  public static String convertBytesToStringUpperCase(byte[] value) {
+    String result = convertBytesToString(value); 
+    return result == null ? null : result.toUpperCase();
+  }
   
+  public static String convertBytesToStringUpperCamelCase(byte[] value) {
+    String result = convertBytesToString(value);
+    String resultUpperCamelCase = Arrays.stream(result.split("\\s")).
+        map(String::toLowerCase).
+        map(s-> s.substring(0, 1).toUpperCase() + s.substring(1)).
+        collect(Collectors.joining());
+    
+    return result == null ? null : resultUpperCamelCase;
+  }
+  
+  public static String convertBytesToStringLowerCase(byte[] value) {
+    String result = convertBytesToString(value); 
+    return result == null ? null : result.toLowerCase();
+  }
+
+  public static String convertBytesToStringLowerCamelCase(byte[] value) {
+    String result = convertBytesToString(value);
+    String resultLowerCamelCase = Arrays.stream(result.split("\\s")).
+        map(String::toLowerCase).
+        map(s-> s.substring(0, 1).toUpperCase() + s.substring(1)).
+        collect(Collectors.joining());
+    resultLowerCamelCase = resultLowerCamelCase.substring(0, 1).toLowerCase() + resultLowerCamelCase.substring(1);
+    
+    return result == null ? null : resultLowerCamelCase;
+  }
+
   public static Integer convertBytesToInt(byte[] value) {
     Integer result = null;
     String txtValue = convertBytesToString(value);
     if (txtValue != null) {
       try {
-        result = Integer.parseInt(txtValue);
+        result = new BigDecimal(txtValue).intValue();
       } catch (NumberFormatException e) {
         LOGGER.warn("Cannot convert '" + txtValue + "' to java.lang.Integer", e);
       }
@@ -36,7 +69,7 @@ public class HBaseConversor {
     String txtValue = convertBytesToString(value);
     if (txtValue != null) {
       try {
-        result = Long.parseLong(txtValue);
+        result = new BigDecimal(txtValue).longValue();
       } catch (NumberFormatException e) {
         LOGGER.warn("Cannot convert '" + txtValue + "' to java.lang.Long", e);
       }

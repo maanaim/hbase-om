@@ -4,6 +4,14 @@ public enum HBaseFormat {
   
   DEFAULT(""),
   
+  LOWER_CASE(""),
+  
+  LOWER_CAMEL_CASE(""),
+  
+  UPPER_CASE(""),
+  
+  UPPER_CAMEL_CASE(""),
+  
   DATETIME("yyyy-MM-dd HH:mm:ss"),
   
   DATE("yyyy-MM-dd");

@@ -3,9 +3,7 @@ package io.github.maanaim.hbaseom.dao;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.hadoop.hbase.client.Get;
@@ -18,6 +16,9 @@ import org.apache.log4j.Logger;
 import io.github.maanaim.hbaseom.annotation.HBaseColumn;
 import io.github.maanaim.hbaseom.annotation.HBaseRowKey;
 import io.github.maanaim.hbaseom.annotation.HBaseTable;
+import io.github.maanaim.hbaseom.converter.HBaseColumnContextConversor;
+import io.github.maanaim.hbaseom.converter.HBaseRowKeyContextConversor;
+import io.github.maanaim.hbaseom.converter.IContextConversor;
 import io.github.maanaim.hbaseom.exception.DataAccessObjectException;
 import io.github.maanaim.hbaseom.mapper.HBaseConversor;
 import io.github.maanaim.hbaseom.mapper.HBaseFormat;
@@ -77,44 +78,28 @@ public abstract class AbstractHBaseDao<E> {
   
   private E createEntity(Result result) {
     E typeGeneric = null;
+    IContextConversor rowKeyConversor = new HBaseRowKeyContextConversor();
+    IContextConversor columnConversor = new HBaseColumnContextConversor();
     
     try {
       typeGeneric = typeParameterClass.newInstance();
       for (Field field : typeParameterClass.getDeclaredFields()) {
-        
+        String fieldNameType = field.getType().getName();
+
         Object d = null;
+        
         if (field.isAnnotationPresent(HBaseRowKey.class)) {
-          if (field.getType().getName().equalsIgnoreCase(String.class.getName())) {
-            d = HBaseConversor.convertBytesToString(result.getRow());
-          } else if (field.getType().getName().equalsIgnoreCase(Integer.class.getName())) {
-            d = HBaseConversor.convertBytesToInt(result.getRow());
-          } else if (field.getType().getName().equalsIgnoreCase(Long.class.getName())) {
-            d = HBaseConversor.convertBytesToLong(result.getRow());
-          } else if (field.getType().getName().equalsIgnoreCase(BigDecimal.class.getName())) {
-            d = HBaseConversor.convertBytesToBigDecimal(result.getRow());
-          }
-        } else if (field.isAnnotationPresent(HBaseColumn.class)) {
+          d = rowKeyConversor.convert(fieldNameType, result.getRow(), HBaseFormat.DEFAULT);
+        }
+        
+        if (field.isAnnotationPresent(HBaseColumn.class)) {
           Annotation annotation = field.getAnnotation(HBaseColumn.class);
           HBaseColumn hbaseAnnotation = (HBaseColumn) annotation;
           
           byte[] value = result.getValue(HBaseConversor.convertStringToBytes(hbaseAnnotation.family()),
               HBaseConversor.convertStringToBytes(hbaseAnnotation.qualifier()));
           
-          if (field.getType().getName().equalsIgnoreCase(String.class.getName())) {
-            d = HBaseConversor.convertBytesToString(value);
-          } else if (field.getType().getName().equalsIgnoreCase(Integer.class.getName())) {
-            d = HBaseConversor.convertBytesToInt(value);
-          } else if (field.getType().getName().equalsIgnoreCase(Long.class.getName())) {
-            d = HBaseConversor.convertBytesToLong(value);
-          } else if (field.getType().getName().equalsIgnoreCase(BigDecimal.class.getName())) {
-            d = HBaseConversor.convertBytesToBigDecimal(value);
-          } else if (field.getType().getName().equalsIgnoreCase(Date.class.getName())) {
-            if (hbaseAnnotation.format().equals(HBaseFormat.DATETIME)) {
-              d = HBaseConversor.convertBytesToDateTime(value);
-            } else {
-              d = HBaseConversor.convertBytesToDate(value);
-            }
-          }
+          d = columnConversor.convert(fieldNameType, value, hbaseAnnotation.format());
         }
 
         boolean accessible = field.isAccessible();
