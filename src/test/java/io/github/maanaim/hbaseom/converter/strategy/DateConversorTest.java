@@ -40,4 +40,18 @@ public class DateConversorTest {
     assertEquals(null, c.convert("xpto".getBytes(), HBaseFormat.DATETIME));
   }
 
+  @Test
+  public void test7() {
+    assertEquals("Thu Aug 31 09:00:00 BRT 2017", c.convert("2017-08-31 09:00:00.000".getBytes(), HBaseFormat.DATETIME).toString());
+  }
+
+  @Test
+  public void test8() {
+    assertEquals("Wed Aug 30 23:59:59 BRT 2017", c.convert("2017-08-30 23:59:59.999".getBytes(), HBaseFormat.DATETIME).toString());
+  }
+
+  @Test
+  public void test9() {
+    assertEquals("Wed Aug 11 00:00:00 BRT 1982", c.convert("1982-08-11 00:00:00.000".getBytes(), HBaseFormat.DATETIME).toString());
+  }
 }

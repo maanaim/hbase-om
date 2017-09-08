@@ -31,7 +31,8 @@ public class TestHBase {
     config.set("hbase.client.retries.number", "3");
     config.set("hbase.client.pause", "1000");
     config.set("zookeeper.recovery.retry", "1");
-    
+
+    long startTime = System.currentTimeMillis();
     Table table = null;
     try {
       Connection connection = ConnectionFactory.createConnection(config);
@@ -41,11 +42,14 @@ public class TestHBase {
     } catch (IOException e) {
       LOGGER.warn("Erro ao conectar com o HBase.", e);
     }
+    System.out.println("Time to warm-up the HBase Connection: " + (System.currentTimeMillis()-startTime));
     
+    startTime = System.currentTimeMillis();
     ContratoDao dao = new ContratoDao();
     dao.setTable(table);
     List<Contrato> contratos = dao.search("28254830606");
     contratos.forEach(a -> System.out.println(a.toString()));
+    System.out.println("Time to search and create objects: " + (System.currentTimeMillis()-startTime));
   }
 
 }

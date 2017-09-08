@@ -20,6 +20,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Format string fields by lower, upper, lower camel and upper camel case
 - Changelog
 
+### Changed
+- HBase client library was updated to 1.1.12
+
+### Fixed
+- Bug convert date
+
 
 ## [1.1.2] - 2017-08-23
 ### Fixed

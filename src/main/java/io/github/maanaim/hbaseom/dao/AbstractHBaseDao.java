@@ -21,7 +21,6 @@ import io.github.maanaim.hbaseom.converter.HBaseRowKeyContextConversor;
 import io.github.maanaim.hbaseom.converter.IContextConversor;
 import io.github.maanaim.hbaseom.exception.DataAccessObjectException;
 import io.github.maanaim.hbaseom.mapper.HBaseConversor;
-import io.github.maanaim.hbaseom.mapper.HBaseFormat;
 
 public abstract class AbstractHBaseDao<E> {
   
@@ -89,7 +88,7 @@ public abstract class AbstractHBaseDao<E> {
         Object d = null;
         
         if (field.isAnnotationPresent(HBaseRowKey.class)) {
-          d = rowKeyConversor.convert(fieldNameType, result.getRow(), HBaseFormat.DEFAULT);
+          d = rowKeyConversor.convert(fieldNameType, result.getRow());
         }
         
         if (field.isAnnotationPresent(HBaseColumn.class)) {
