@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Map fields to enum
 
 
-## [1.2.0]
+## [1.2.0] - 2017-09-08
 ### Added
 - Unit tests
 - Strategy to create types
