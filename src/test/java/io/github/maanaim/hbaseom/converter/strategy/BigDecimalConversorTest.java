@@ -62,4 +62,14 @@ public class BigDecimalConversorTest {
     assertEquals(new BigDecimal("3.0"), c.convert("3.0".getBytes(), HBaseFormat.DATE));
   }
 
+  @Test
+  public void test11() {
+    assertEquals(new BigDecimal("30.00"), c.convert("30.00".getBytes(), HBaseFormat.DATE));
+  }
+
+  @Test
+  public void test12() {
+    assertEquals(new BigDecimal("30.00").toString(), c.convert("30.00".getBytes(), HBaseFormat.DATE).toString());
+  }
+
 }

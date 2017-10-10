@@ -11,6 +11,11 @@ import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.client.Table;
+import org.apache.hadoop.hbase.filter.CompareFilter.CompareOp;
+import org.apache.hadoop.hbase.filter.Filter;
+import org.apache.hadoop.hbase.filter.FilterList;
+import org.apache.hadoop.hbase.filter.FilterList.Operator;
+import org.apache.hadoop.hbase.filter.SingleColumnValueFilter;
 import org.apache.log4j.Logger;
 
 import io.github.maanaim.hbaseom.annotation.HBaseColumn;
@@ -69,6 +74,49 @@ public abstract class AbstractHBaseDao<E> {
         objects.add(createEntity(result));
       });
     } catch (IOException e) {
+      throw new DataAccessObjectException(e);
+    }
+    
+    return objects;
+  }
+
+  public List<E> search(E entity) throws DataAccessObjectException {
+    List<E> objects = new ArrayList<E>();
+    
+    try {
+      List<Filter> filters = new ArrayList<>();
+      for (Field field : entity.getClass().getDeclaredFields()) {
+
+        if (field.isAnnotationPresent(HBaseColumn.class)) {
+          Annotation annotation = field.getAnnotation(HBaseColumn.class);
+          HBaseColumn hbaseAnnotation = (HBaseColumn) annotation;
+          
+          field.setAccessible(true);
+          Object o = field.get(entity);
+          field.setAccessible(false);
+          if (o != null) {
+            SingleColumnValueFilter f = new SingleColumnValueFilter(
+                HBaseConversor.convertStringToBytes(hbaseAnnotation.family()), 
+                HBaseConversor.convertStringToBytes(hbaseAnnotation.qualifier()), 
+                CompareOp.EQUAL, 
+                HBaseConversor.convertStringToBytes(o.toString()));
+            
+            f.setFilterIfMissing(true);
+            filters.add(f);
+          }
+        }
+      }
+      
+      Scan scan = new Scan();
+      FilterList filterList = new FilterList(Operator.MUST_PASS_ALL);
+      filters.forEach(a -> filterList.addFilter(a));
+      scan.setFilter(filterList);
+      ResultScanner resultScanner = getTable().getScanner(scan);
+      resultScanner.forEach( result -> {
+        objects.add(createEntity(result));
+      });
+      
+    } catch (IOException | IllegalArgumentException | IllegalAccessException e) {
       throw new DataAccessObjectException(e);
     }
     
