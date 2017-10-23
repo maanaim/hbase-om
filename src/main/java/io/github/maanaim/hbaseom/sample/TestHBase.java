@@ -47,7 +47,11 @@ public class TestHBase {
     startTime = System.currentTimeMillis();
     ContratoDao dao = new ContratoDao();
     dao.setTable(table);
-    List<Contrato> contratos = dao.search("28254830606");
+    Contrato contrato = new Contrato();
+    contrato.setNumContrato("1348789-1-502");
+    contrato.setIndContrato(10);
+    List<Contrato> contratos = dao.search(contrato);
+//    List<Contrato> contratos = dao.search("28254830606");
     contratos.forEach(a -> System.out.println(a.toString()));
     System.out.println("Time to search and create objects: " + (System.currentTimeMillis()-startTime));
   }

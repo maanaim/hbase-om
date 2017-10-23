@@ -6,6 +6,7 @@ import java.util.Date;
 import io.github.maanaim.hbaseom.annotation.HBaseColumn;
 import io.github.maanaim.hbaseom.annotation.HBaseRowKey;
 import io.github.maanaim.hbaseom.annotation.HBaseTable;
+import io.github.maanaim.hbaseom.mapper.HBaseFormat;
 
 @HBaseTable(name = "VISAO360.CONSOLIDADO_CONTRATO")
 public class Contrato {
@@ -14,13 +15,13 @@ public class Contrato {
   private String id;
 
   @HBaseColumn(family = "0", qualifier = "NUM_CONTRATO")
-  private String numeroContrato;
+  private String numContrato;
 
   @HBaseColumn(family = "0", qualifier = "IND_CONTRATO")
   private Integer indContrato;
 
   @HBaseColumn(family = "0", qualifier = "COD_CPF_CNPJ")
-  private String codigoCpfCnpj;
+  private String codCpfCnpj;
 
   @HBaseColumn(family = "0", qualifier = "TIPO_RELACIONAMENTO")
   private String tipoRelacionamento;
@@ -29,100 +30,100 @@ public class Contrato {
   private String sistema;
 
   @HBaseColumn(family = "0", qualifier = "NUM_BILHETE")
-  private Long numeroBilhete;
+  private Long numBilhete;
 
   @HBaseColumn(family = "0", qualifier = "NUM_RAMO_EMISSOR")
-  private Integer numeroRamoEmissor;
+  private Integer numRamoEmissor;
 
   @HBaseColumn(family = "0", qualifier = "NUM_APOLICE")
-  private Long numeroApolice;
+  private Long numApolice;
 
   @HBaseColumn(family = "0", qualifier = "NUM_ITEM")
-  private Integer numeroItem;
+  private Integer numItem;
 
   @HBaseColumn(family = "0", qualifier = "NUM_ENDOSSO")
-  private Integer numeroEndosso;
+  private Integer numEndosso;
 
   @HBaseColumn(family = "0", qualifier = "NUM_CERTIFICADO")
-  private Long numeroCertificado;
+  private Long numCertificado;
 
   @HBaseColumn(family = "0", qualifier = "NUM_RISCO")
-  private Integer numeroRisco;
+  private Integer numRisco;
 
   @HBaseColumn(family = "0", qualifier = "NUM_CONTRATO_TERC")
-  private Long numeroContratoTerc;
+  private Long numContratoTerc;
 
   @HBaseColumn(family = "0", qualifier = "NUM_PLANO")
-  private Integer numeroPlano;
+  private Integer numPlano;
 
   @HBaseColumn(family = "0", qualifier = "NUM_SERIE")
-  private Integer numeroSerie;
+  private Integer numSerie;
 
   @HBaseColumn(family = "0", qualifier = "NUM_TITULO")
-  private Integer numeroTitulo;
+  private Integer numTitulo;
 
   @HBaseColumn(family = "0", qualifier = "NUM_MOD_PLANO")
-  private Integer numeroModPlano;
+  private Integer numModPlano;
 
   @HBaseColumn(family = "0", qualifier = "COD_GRUPO")
-  private Integer codigoGrupo;
+  private Integer codGrupo;
 
   @HBaseColumn(family = "0", qualifier = "COD_COTA")
-  private Integer codigoCota;
+  private Integer codCota;
 
   @HBaseColumn(family = "0", qualifier = "NUM_VERSAO")
-  private Integer numeroVersao;
+  private Integer numVersao;
 
   @HBaseColumn(family = "0", qualifier = "NUM_CONTRATO_VINC")
-  private Long numeroContratoVinc;
+  private Long numContratoVinc;
 
   @HBaseColumn(family = "0", qualifier = "NUM_PROPOSTA")
-  private Long numeroProposta;
+  private Long numProposta;
 
   @HBaseColumn(family = "0", qualifier = "COD_PRODUTO")
-  private Long codigoProduto;
+  private Long codProduto;
 
   @HBaseColumn(family = "0", qualifier = "COD_PRODUTO_BU")
-  private Long codigoProdutoBu;
+  private Long codProdutoBu;
 
   @HBaseColumn(family = "0", qualifier = "TIPO_CONTRATO")
   private String tipoContrato;
 
   @HBaseColumn(family = "0", qualifier = "COD_SUBGRUPO")
-  private Integer codigoSubgrupo;
+  private Integer codSubgrupo;
 
   @HBaseColumn(family = "0", qualifier = "NUM_APOLICE_ANT")
-  private Long numeroApoliceAnt;
+  private Long numApoliceAnt;
 
   @HBaseColumn(family = "0", qualifier = "NUM_CERTIFICADO_ANT")
-  private Long numeroCertificadoAnt;
+  private Long numCertificadoAnt;
 
   @HBaseColumn(family = "0", qualifier = "NUM_BILHETE_ANT")
-  private Long numeroBilheteAnt;
+  private Long numBilheteAnt;
 
   @HBaseColumn(family = "0", qualifier = "NUM_CONTRATO_ANT")
-  private String numeroContratoAnt;
+  private String numContratoAnt;
 
   @HBaseColumn(family = "0", qualifier = "NUM_PLANO_ANT")
-  private Integer numeroPlanoAnt;
+  private Integer numPlanoAnt;
 
   @HBaseColumn(family = "0", qualifier = "NUM_SERIE_ANT")
-  private Integer numeroSerieAnt;
+  private Integer numSerieAnt;
 
   @HBaseColumn(family = "0", qualifier = "NUM_TITULO_ANT")
-  private Integer numeroTituloAnt;
+  private Integer numTituloAnt;
 
   @HBaseColumn(family = "0", qualifier = "NUM_MOD_PLANO_ANT")
-  private Integer numeroModPlanoAnt;
+  private Integer numModPlanoAnt;
 
   @HBaseColumn(family = "0", qualifier = "NUM_PROPOSTA_ANT")
-  private Long numeroPropostaAnt;
+  private Long numPropostaAnt;
 
   @HBaseColumn(family = "0", qualifier = "COD_AGENCIA_VENDA")
-  private Integer codigoAgenciaVenda;
+  private Integer codAgenciaVenda;
 
   @HBaseColumn(family = "0", qualifier = "COD_AGENCIA_COBRANCA")
-  private Integer codigoAgenciaCobranca;
+  private Integer codAgenciaCobranca;
 
   @HBaseColumn(family = "0", qualifier = "CANAL_VENDA")
   private String canalVenda;
@@ -130,10 +131,10 @@ public class Contrato {
   @HBaseColumn(family = "0", qualifier = "SITUACAO_CONTRATO")
   private String situacaoContrato;
 
-  @HBaseColumn(family = "0", qualifier = "DTH_EMISSAO_PROPOSTA")
+  @HBaseColumn(family = "0", qualifier = "DTH_EMISSAO_PROPOSTA", format = HBaseFormat.DATE)
   private Date dataHoraEmissaoProposta;
 
-  @HBaseColumn(family = "0", qualifier = "DTH_EMISSAO_CONTRATO")
+  @HBaseColumn(family = "0", qualifier = "DTH_EMISSAO_CONTRATO", format = HBaseFormat.DATE)
   private Date dataHoraEmissaoContrato;
 
   @HBaseColumn(family = "0", qualifier = "NOM_PRODUTO")
@@ -152,10 +153,10 @@ public class Contrato {
   private String formaPagamento;
 
   @HBaseColumn(family = "0", qualifier = "NUM_PARC_CONTRATADAS")
-  private Integer numeroParcContratadas;
+  private Integer numParcContratadas;
 
   @HBaseColumn(family = "0", qualifier = "NUM_MATRI_VENDEDOR")
-  private String numeroMatriVendedor;
+  private String numMatriVendedor;
 
   @HBaseColumn(family = "0", qualifier = "QTD_VIDA_SEGURADA")
   private Integer qtdVidaSegurada;
@@ -163,37 +164,37 @@ public class Contrato {
   @HBaseColumn(family = "0", qualifier = "VLR_IOF")
   private BigDecimal valorIof;
 
-  @HBaseColumn(family = "0", qualifier = "DTH_QUITACAO")
+  @HBaseColumn(family = "0", qualifier = "DTH_QUITACAO", format = HBaseFormat.DATE)
   private Date dataHoraQuitacao;
 
-  @HBaseColumn(family = "0", qualifier = "DTH_CANCELAMENTO")
+  @HBaseColumn(family = "0", qualifier = "DTH_CANCELAMENTO", format = HBaseFormat.DATE)
   private Date dataHoraCancelamento;
 
-  @HBaseColumn(family = "0", qualifier = "DTH_VENC_PARCELA")
+  @HBaseColumn(family = "0", qualifier = "DTH_VENC_PARCELA", format = HBaseFormat.DATE)
   private Date dataHoraVencParcela;
 
-  @HBaseColumn(family = "0", qualifier = "DTH_DECLINIO")
+  @HBaseColumn(family = "0", qualifier = "DTH_DECLINIO", format = HBaseFormat.DATE)
   private Date dataHoraDeclinio;
 
-  @HBaseColumn(family = "0", qualifier = "DTH_ASSINATURA")
+  @HBaseColumn(family = "0", qualifier = "DTH_ASSINATURA", format = HBaseFormat.DATE)
   private Date dataHoraAssinatura;
 
-  @HBaseColumn(family = "0", qualifier = "DTH_AVERBACAO")
+  @HBaseColumn(family = "0", qualifier = "DTH_AVERBACAO", format = HBaseFormat.DATE)
   private Date dataHoraAverbacao;
 
-  @HBaseColumn(family = "0", qualifier = "DTH_EFETIVACAO")
+  @HBaseColumn(family = "0", qualifier = "DTH_EFETIVACAO", format = HBaseFormat.DATE)
   private Date dataHoraEfetivacao;
 
-  @HBaseColumn(family = "0", qualifier = "DTH_INI_AMORTIZ")
+  @HBaseColumn(family = "0", qualifier = "DTH_INI_AMORTIZ", format = HBaseFormat.DATE)
   private Date dataHoraIniAmortiz;
 
-  @HBaseColumn(family = "0", qualifier = "DTH_REJEICAO_PROP")
+  @HBaseColumn(family = "0", qualifier = "DTH_REJEICAO_PROP", format = HBaseFormat.DATE)
   private Date dataHoraRejeicaoProp;
 
-  @HBaseColumn(family = "0", qualifier = "DTH_INI_VIGENCIA")
+  @HBaseColumn(family = "0", qualifier = "DTH_INI_VIGENCIA", format = HBaseFormat.DATE)
   private Date dataHoraIniVigencia;
 
-  @HBaseColumn(family = "0", qualifier = "DTH_FIM_VIGENCIA")
+  @HBaseColumn(family = "0", qualifier = "DTH_FIM_VIGENCIA", format = HBaseFormat.DATE)
   private Date dataHoraFimVigencia;
 
   @HBaseColumn(family = "0", qualifier = "VLR_PREMIO_MIP")
@@ -217,7 +218,7 @@ public class Contrato {
   @HBaseColumn(family = "0", qualifier = "VLR_PARCELA")
   private BigDecimal valorParcela;
 
-  @HBaseColumn(family = "0", qualifier = "DTH_VENDA")
+  @HBaseColumn(family = "0", qualifier = "DTH_VENDA", format = HBaseFormat.DATE)
   private Date dataHoraVenda;
 
   @HBaseColumn(family = "0", qualifier = "ITEM_SEGURADO")
@@ -247,10 +248,10 @@ public class Contrato {
   @HBaseColumn(family = "0", qualifier = "STA_CONTRATO_LEGADO")
   private String staContratoLegado;
 
-  @HBaseColumn(family = "0", qualifier = "DTH_REFERENCIA")
+  @HBaseColumn(family = "0", qualifier = "DTH_REFERENCIA", format = HBaseFormat.DATETIME)
   private Date dataHoraReferencia;
 
-  @HBaseColumn(family = "0", qualifier = "DTH_ATUALIZACAO")
+  @HBaseColumn(family = "0", qualifier = "DTH_ATUALIZACAO", format = HBaseFormat.DATETIME)
   private Date dataHoraAtualizacao;
 
   @HBaseColumn(family = "0", qualifier = "EMAIL")
@@ -287,7 +288,7 @@ public class Contrato {
   private String desGrupo;
 
   @HBaseColumn(family = "0", qualifier = "COD_OPER_CONTRATO")
-  private String codigoOperContrato;
+  private String codOperContrato;
 
   @HBaseColumn(family = "0", qualifier = "DES_OPER_CONTRATO")
   private String desOperContrato;
@@ -296,7 +297,7 @@ public class Contrato {
   private String tipoPessoa;
 
   @HBaseColumn(family = "0", qualifier = "COD_TIPO_RELACIONAMENTO")
-  private Integer codigoTipoRelacionamento;
+  private Integer codTipoRelacionamento;
 
   public String getId() {
     return id;
@@ -306,12 +307,12 @@ public class Contrato {
     this.id = id;
   }
 
-  public String getNumeroContrato() {
-    return numeroContrato;
+  public String getNumContrato() {
+    return numContrato;
   }
 
-  public void setNumeroContrato(String numeroContrato) {
-    this.numeroContrato = numeroContrato;
+  public void setNumContrato(String numeroContrato) {
+    this.numContrato = numeroContrato;
   }
 
   public Integer getIndContrato() {
@@ -322,12 +323,12 @@ public class Contrato {
     this.indContrato = indContrato;
   }
 
-  public String getCodigoCpfCnpj() {
-    return codigoCpfCnpj;
+  public String getCodCpfCnpj() {
+    return codCpfCnpj;
   }
 
-  public void setCodigoCpfCnpj(String codigoCpfCnpj) {
-    this.codigoCpfCnpj = codigoCpfCnpj;
+  public void setCodCpfCnpj(String codigoCpfCnpj) {
+    this.codCpfCnpj = codigoCpfCnpj;
   }
 
   public String getTipoRelacionamento() {
@@ -346,156 +347,156 @@ public class Contrato {
     this.sistema = sistema;
   }
 
-  public Long getNumeroBilhete() {
-    return numeroBilhete;
+  public Long getNumBilhete() {
+    return numBilhete;
   }
 
-  public void setNumeroBilhete(Long numeroBilhete) {
-    this.numeroBilhete = numeroBilhete;
+  public void setNumBilhete(Long numeroBilhete) {
+    this.numBilhete = numeroBilhete;
   }
 
-  public Integer getNumeroRamoEmissor() {
-    return numeroRamoEmissor;
+  public Integer getNumRamoEmissor() {
+    return numRamoEmissor;
   }
 
-  public void setNumeroRamoEmissor(Integer numeroRamoEmissor) {
-    this.numeroRamoEmissor = numeroRamoEmissor;
+  public void setNumRamoEmissor(Integer numeroRamoEmissor) {
+    this.numRamoEmissor = numeroRamoEmissor;
   }
 
-  public Long getNumeroApolice() {
-    return numeroApolice;
+  public Long getNumApolice() {
+    return numApolice;
   }
 
-  public void setNumeroApolice(Long numeroApolice) {
-    this.numeroApolice = numeroApolice;
+  public void setNumApolice(Long numeroApolice) {
+    this.numApolice = numeroApolice;
   }
 
-  public Integer getNumeroItem() {
-    return numeroItem;
+  public Integer getNumItem() {
+    return numItem;
   }
 
-  public void setNumeroItem(Integer numeroItem) {
-    this.numeroItem = numeroItem;
+  public void setNumItem(Integer numeroItem) {
+    this.numItem = numeroItem;
   }
 
-  public Integer getNumeroEndosso() {
-    return numeroEndosso;
+  public Integer getNumEndosso() {
+    return numEndosso;
   }
 
-  public void setNumeroEndosso(Integer numeroEndosso) {
-    this.numeroEndosso = numeroEndosso;
+  public void setNumEndosso(Integer numeroEndosso) {
+    this.numEndosso = numeroEndosso;
   }
 
-  public Long getNumeroCertificado() {
-    return numeroCertificado;
+  public Long getNumCertificado() {
+    return numCertificado;
   }
 
-  public void setNumeroCertificado(Long numeroCertificado) {
-    this.numeroCertificado = numeroCertificado;
+  public void setNumCertificado(Long numeroCertificado) {
+    this.numCertificado = numeroCertificado;
   }
 
-  public Integer getNumeroRisco() {
-    return numeroRisco;
+  public Integer getNumRisco() {
+    return numRisco;
   }
 
-  public void setNumeroRisco(Integer numeroRisco) {
-    this.numeroRisco = numeroRisco;
+  public void setNumRisco(Integer numeroRisco) {
+    this.numRisco = numeroRisco;
   }
 
-  public Long getNumeroContratoTerc() {
-    return numeroContratoTerc;
+  public Long getNumContratoTerc() {
+    return numContratoTerc;
   }
 
-  public void setNumeroContratoTerc(Long numeroContratoTerc) {
-    this.numeroContratoTerc = numeroContratoTerc;
+  public void setNumContratoTerc(Long numeroContratoTerc) {
+    this.numContratoTerc = numeroContratoTerc;
   }
 
-  public Integer getNumeroPlano() {
-    return numeroPlano;
+  public Integer getNumPlano() {
+    return numPlano;
   }
 
-  public void setNumeroPlano(Integer numeroPlano) {
-    this.numeroPlano = numeroPlano;
+  public void setNumPlano(Integer numeroPlano) {
+    this.numPlano = numeroPlano;
   }
 
-  public Integer getNumeroSerie() {
-    return numeroSerie;
+  public Integer getNumSerie() {
+    return numSerie;
   }
 
-  public void setNumeroSerie(Integer numeroSerie) {
-    this.numeroSerie = numeroSerie;
+  public void setNumSerie(Integer numeroSerie) {
+    this.numSerie = numeroSerie;
   }
 
-  public Integer getNumeroTitulo() {
-    return numeroTitulo;
+  public Integer getNumTitulo() {
+    return numTitulo;
   }
 
-  public void setNumeroTitulo(Integer numeroTitulo) {
-    this.numeroTitulo = numeroTitulo;
+  public void setNumTitulo(Integer numeroTitulo) {
+    this.numTitulo = numeroTitulo;
   }
 
-  public Integer getNumeroModPlano() {
-    return numeroModPlano;
+  public Integer getNumModPlano() {
+    return numModPlano;
   }
 
-  public void setNumeroModPlano(Integer numeroModPlano) {
-    this.numeroModPlano = numeroModPlano;
+  public void setNumModPlano(Integer numeroModPlano) {
+    this.numModPlano = numeroModPlano;
   }
 
-  public Integer getCodigoGrupo() {
-    return codigoGrupo;
+  public Integer getCodGrupo() {
+    return codGrupo;
   }
 
-  public void setCodigoGrupo(Integer codigoGrupo) {
-    this.codigoGrupo = codigoGrupo;
+  public void setCodGrupo(Integer codigoGrupo) {
+    this.codGrupo = codigoGrupo;
   }
 
-  public Integer getCodigoCota() {
-    return codigoCota;
+  public Integer getCodCota() {
+    return codCota;
   }
 
-  public void setCodigoCota(Integer codigoCota) {
-    this.codigoCota = codigoCota;
+  public void setCodCota(Integer codigoCota) {
+    this.codCota = codigoCota;
   }
 
-  public Integer getNumeroVersao() {
-    return numeroVersao;
+  public Integer getNumVersao() {
+    return numVersao;
   }
 
-  public void setNumeroVersao(Integer numeroVersao) {
-    this.numeroVersao = numeroVersao;
+  public void setNumVersao(Integer numeroVersao) {
+    this.numVersao = numeroVersao;
   }
 
-  public Long getNumeroContratoVinc() {
-    return numeroContratoVinc;
+  public Long getNumContratoVinc() {
+    return numContratoVinc;
   }
 
-  public void setNumeroContratoVinc(Long numeroContratoVinc) {
-    this.numeroContratoVinc = numeroContratoVinc;
+  public void setNumContratoVinc(Long numeroContratoVinc) {
+    this.numContratoVinc = numeroContratoVinc;
   }
 
-  public Long getNumeroProposta() {
-    return numeroProposta;
+  public Long getNumProposta() {
+    return numProposta;
   }
 
-  public void setNumeroProposta(Long numeroProposta) {
-    this.numeroProposta = numeroProposta;
+  public void setNumProposta(Long numeroProposta) {
+    this.numProposta = numeroProposta;
   }
 
-  public Long getCodigoProduto() {
-    return codigoProduto;
+  public Long getCodProduto() {
+    return codProduto;
   }
 
-  public void setCodigoProduto(Long codigoProduto) {
-    this.codigoProduto = codigoProduto;
+  public void setCodProduto(Long codigoProduto) {
+    this.codProduto = codigoProduto;
   }
 
-  public Long getCodigoProdutoBu() {
-    return codigoProdutoBu;
+  public Long getCodProdutoBu() {
+    return codProdutoBu;
   }
 
-  public void setCodigoProdutoBu(Long codigoProdutoBu) {
-    this.codigoProdutoBu = codigoProdutoBu;
+  public void setCodProdutoBu(Long codigoProdutoBu) {
+    this.codProdutoBu = codigoProdutoBu;
   }
 
   public String getTipoContrato() {
@@ -506,100 +507,100 @@ public class Contrato {
     this.tipoContrato = tipoContrato;
   }
 
-  public Integer getCodigoSubgrupo() {
-    return codigoSubgrupo;
+  public Integer getCodSubgrupo() {
+    return codSubgrupo;
   }
 
-  public void setCodigoSubgrupo(Integer codigoSubgrupo) {
-    this.codigoSubgrupo = codigoSubgrupo;
+  public void setCodSubgrupo(Integer codigoSubgrupo) {
+    this.codSubgrupo = codigoSubgrupo;
   }
 
-  public Long getNumeroApoliceAnt() {
-    return numeroApoliceAnt;
+  public Long getNumApoliceAnt() {
+    return numApoliceAnt;
   }
 
-  public void setNumeroApoliceAnt(Long numeroApoliceAnt) {
-    this.numeroApoliceAnt = numeroApoliceAnt;
+  public void setNumApoliceAnt(Long numeroApoliceAnt) {
+    this.numApoliceAnt = numeroApoliceAnt;
   }
 
-  public Long getNumeroCertificadoAnt() {
-    return numeroCertificadoAnt;
+  public Long getNumCertificadoAnt() {
+    return numCertificadoAnt;
   }
 
-  public void setNumeroCertificadoAnt(Long numeroCertificadoAnt) {
-    this.numeroCertificadoAnt = numeroCertificadoAnt;
+  public void setNumCertificadoAnt(Long numeroCertificadoAnt) {
+    this.numCertificadoAnt = numeroCertificadoAnt;
   }
 
-  public Long getNumeroBilheteAnt() {
-    return numeroBilheteAnt;
+  public Long getNumBilheteAnt() {
+    return numBilheteAnt;
   }
 
-  public void setNumeroBilheteAnt(Long numeroBilheteAnt) {
-    this.numeroBilheteAnt = numeroBilheteAnt;
+  public void setNumBilheteAnt(Long numeroBilheteAnt) {
+    this.numBilheteAnt = numeroBilheteAnt;
   }
 
-  public String getNumeroContratoAnt() {
-    return numeroContratoAnt;
+  public String getNumContratoAnt() {
+    return numContratoAnt;
   }
 
-  public void setNumeroContratoAnt(String numeroContratoAnt) {
-    this.numeroContratoAnt = numeroContratoAnt;
+  public void setNumContratoAnt(String numeroContratoAnt) {
+    this.numContratoAnt = numeroContratoAnt;
   }
 
-  public Integer getNumeroPlanoAnt() {
-    return numeroPlanoAnt;
+  public Integer getNumPlanoAnt() {
+    return numPlanoAnt;
   }
 
-  public void setNumeroPlanoAnt(Integer numeroPlanoAnt) {
-    this.numeroPlanoAnt = numeroPlanoAnt;
+  public void setNumPlanoAnt(Integer numeroPlanoAnt) {
+    this.numPlanoAnt = numeroPlanoAnt;
   }
 
-  public Integer getNumeroSerieAnt() {
-    return numeroSerieAnt;
+  public Integer getNumSerieAnt() {
+    return numSerieAnt;
   }
 
-  public void setNumeroSerieAnt(Integer numeroSerieAnt) {
-    this.numeroSerieAnt = numeroSerieAnt;
+  public void setNumSerieAnt(Integer numeroSerieAnt) {
+    this.numSerieAnt = numeroSerieAnt;
   }
 
-  public Integer getNumeroTituloAnt() {
-    return numeroTituloAnt;
+  public Integer getNumTituloAnt() {
+    return numTituloAnt;
   }
 
-  public void setNumeroTituloAnt(Integer numeroTituloAnt) {
-    this.numeroTituloAnt = numeroTituloAnt;
+  public void setNumTituloAnt(Integer numeroTituloAnt) {
+    this.numTituloAnt = numeroTituloAnt;
   }
 
-  public Integer getNumeroModPlanoAnt() {
-    return numeroModPlanoAnt;
+  public Integer getNumModPlanoAnt() {
+    return numModPlanoAnt;
   }
 
-  public void setNumeroModPlanoAnt(Integer numeroModPlanoAnt) {
-    this.numeroModPlanoAnt = numeroModPlanoAnt;
+  public void setNumModPlanoAnt(Integer numeroModPlanoAnt) {
+    this.numModPlanoAnt = numeroModPlanoAnt;
   }
 
-  public Long getNumeroPropostaAnt() {
-    return numeroPropostaAnt;
+  public Long getNumPropostaAnt() {
+    return numPropostaAnt;
   }
 
-  public void setNumeroPropostaAnt(Long numeroPropostaAnt) {
-    this.numeroPropostaAnt = numeroPropostaAnt;
+  public void setNumPropostaAnt(Long numeroPropostaAnt) {
+    this.numPropostaAnt = numeroPropostaAnt;
   }
 
-  public Integer getCodigoAgenciaVenda() {
-    return codigoAgenciaVenda;
+  public Integer getCodAgenciaVenda() {
+    return codAgenciaVenda;
   }
 
-  public void setCodigoAgenciaVenda(Integer codigoAgenciaVenda) {
-    this.codigoAgenciaVenda = codigoAgenciaVenda;
+  public void setCodAgenciaVenda(Integer codigoAgenciaVenda) {
+    this.codAgenciaVenda = codigoAgenciaVenda;
   }
 
-  public Integer getCodigoAgenciaCobranca() {
-    return codigoAgenciaCobranca;
+  public Integer getCodAgenciaCobranca() {
+    return codAgenciaCobranca;
   }
 
-  public void setCodigoAgenciaCobranca(Integer codigoAgenciaCobranca) {
-    this.codigoAgenciaCobranca = codigoAgenciaCobranca;
+  public void setCodAgenciaCobranca(Integer codigoAgenciaCobranca) {
+    this.codAgenciaCobranca = codigoAgenciaCobranca;
   }
 
   public String getCanalVenda() {
@@ -674,20 +675,20 @@ public class Contrato {
     this.formaPagamento = formaPagamento;
   }
 
-  public Integer getNumeroParcContratadas() {
-    return numeroParcContratadas;
+  public Integer getNumParcContratadas() {
+    return numParcContratadas;
   }
 
-  public void setNumeroParcContratadas(Integer numeroParcContratadas) {
-    this.numeroParcContratadas = numeroParcContratadas;
+  public void setNumParcContratadas(Integer numeroParcContratadas) {
+    this.numParcContratadas = numeroParcContratadas;
   }
 
-  public String getNumeroMatriVendedor() {
-    return numeroMatriVendedor;
+  public String getNumMatriVendedor() {
+    return numMatriVendedor;
   }
 
-  public void setNumeroMatriVendedor(String numeroMatriVendedor) {
-    this.numeroMatriVendedor = numeroMatriVendedor;
+  public void setNumMatriVendedor(String numeroMatriVendedor) {
+    this.numMatriVendedor = numeroMatriVendedor;
   }
 
   public Integer getQtdVidaSegurada() {
@@ -1034,12 +1035,12 @@ public class Contrato {
     this.desGrupo = desGrupo;
   }
 
-  public String getCodigoOperContrato() {
-    return codigoOperContrato;
+  public String getCodOperContrato() {
+    return codOperContrato;
   }
 
-  public void setCodigoOperContrato(String codigoOperContrato) {
-    this.codigoOperContrato = codigoOperContrato;
+  public void setCodOperContrato(String codigoOperContrato) {
+    this.codOperContrato = codigoOperContrato;
   }
 
   public String getDesOperContrato() {
@@ -1058,36 +1059,36 @@ public class Contrato {
     this.tipoPessoa = tipoPessoa;
   }
 
-  public Integer getCodigoTipoRelacionamento() {
-    return codigoTipoRelacionamento;
+  public Integer getCodTipoRelacionamento() {
+    return codTipoRelacionamento;
   }
 
-  public void setCodigoTipoRelacionamento(Integer codigoTipoRelacionamento) {
-    this.codigoTipoRelacionamento = codigoTipoRelacionamento;
+  public void setCodTipoRelacionamento(Integer codigoTipoRelacionamento) {
+    this.codTipoRelacionamento = codigoTipoRelacionamento;
   }
 
   @Override
   public String toString() {
-    return "Contrato [id=" + id + ", numeroContrato=" + numeroContrato + ", indContrato=" + indContrato
-        + ", codigoCpfCnpj=" + codigoCpfCnpj + ", tipoRelacionamento=" + tipoRelacionamento + ", sistema=" + sistema
-        + ", numeroBilhete=" + numeroBilhete + ", numeroRamoEmissor=" + numeroRamoEmissor + ", numeroApolice="
-        + numeroApolice + ", numeroItem=" + numeroItem + ", numeroEndosso=" + numeroEndosso + ", numeroCertificado="
-        + numeroCertificado + ", numeroRisco=" + numeroRisco + ", numeroContratoTerc=" + numeroContratoTerc
-        + ", numeroPlano=" + numeroPlano + ", numeroSerie=" + numeroSerie + ", numeroTitulo=" + numeroTitulo
-        + ", numeroModPlano=" + numeroModPlano + ", codigoGrupo=" + codigoGrupo + ", codigoCota=" + codigoCota
-        + ", numeroVersao=" + numeroVersao + ", numeroContratoVinc=" + numeroContratoVinc + ", numeroProposta="
-        + numeroProposta + ", codigoProduto=" + codigoProduto + ", codigoProdutoBu=" + codigoProdutoBu
-        + ", tipoContrato=" + tipoContrato + ", codigoSubgrupo=" + codigoSubgrupo + ", numeroApoliceAnt="
-        + numeroApoliceAnt + ", numeroCertificadoAnt=" + numeroCertificadoAnt + ", numeroBilheteAnt=" + numeroBilheteAnt
-        + ", numeroContratoAnt=" + numeroContratoAnt + ", numeroPlanoAnt=" + numeroPlanoAnt + ", numeroSerieAnt="
-        + numeroSerieAnt + ", numeroTituloAnt=" + numeroTituloAnt + ", numeroModPlanoAnt=" + numeroModPlanoAnt
-        + ", numeroPropostaAnt=" + numeroPropostaAnt + ", codigoAgenciaVenda=" + codigoAgenciaVenda
-        + ", codigoAgenciaCobranca=" + codigoAgenciaCobranca + ", canalVenda=" + canalVenda + ", situacaoContrato="
+    return "Contrato [id=" + id + ", numeroContrato=" + numContrato + ", indContrato=" + indContrato
+        + ", codigoCpfCnpj=" + codCpfCnpj + ", tipoRelacionamento=" + tipoRelacionamento + ", sistema=" + sistema
+        + ", numeroBilhete=" + numBilhete + ", numeroRamoEmissor=" + numRamoEmissor + ", numeroApolice="
+        + numApolice + ", numeroItem=" + numItem + ", numeroEndosso=" + numEndosso + ", numeroCertificado="
+        + numCertificado + ", numeroRisco=" + numRisco + ", numeroContratoTerc=" + numContratoTerc
+        + ", numeroPlano=" + numPlano + ", numeroSerie=" + numSerie + ", numeroTitulo=" + numTitulo
+        + ", numeroModPlano=" + numModPlano + ", codigoGrupo=" + codGrupo + ", codigoCota=" + codCota
+        + ", numeroVersao=" + numVersao + ", numeroContratoVinc=" + numContratoVinc + ", numeroProposta="
+        + numProposta + ", codigoProduto=" + codProduto + ", codigoProdutoBu=" + codProdutoBu
+        + ", tipoContrato=" + tipoContrato + ", codigoSubgrupo=" + codSubgrupo + ", numeroApoliceAnt="
+        + numApoliceAnt + ", numeroCertificadoAnt=" + numCertificadoAnt + ", numeroBilheteAnt=" + numBilheteAnt
+        + ", numeroContratoAnt=" + numContratoAnt + ", numeroPlanoAnt=" + numPlanoAnt + ", numeroSerieAnt="
+        + numSerieAnt + ", numeroTituloAnt=" + numTituloAnt + ", numeroModPlanoAnt=" + numModPlanoAnt
+        + ", numeroPropostaAnt=" + numPropostaAnt + ", codigoAgenciaVenda=" + codAgenciaVenda
+        + ", codigoAgenciaCobranca=" + codAgenciaCobranca + ", canalVenda=" + canalVenda + ", situacaoContrato="
         + situacaoContrato + ", dataHoraEmissaoProposta=" + dataHoraEmissaoProposta + ", dataHoraEmissaoContrato="
         + dataHoraEmissaoContrato + ", nomeProduto=" + nomeProduto + ", nomeProdutoBu=" + nomeProdutoBu
         + ", segmentoProduto=" + segmentoProduto + ", opcaoPagamento=" + opcaoPagamento + ", formaPagamento="
-        + formaPagamento + ", numeroParcContratadas=" + numeroParcContratadas + ", numeroMatriVendedor="
-        + numeroMatriVendedor + ", qtdVidaSegurada=" + qtdVidaSegurada + ", valorIof=" + valorIof
+        + formaPagamento + ", numeroParcContratadas=" + numParcContratadas + ", numeroMatriVendedor="
+        + numMatriVendedor + ", qtdVidaSegurada=" + qtdVidaSegurada + ", valorIof=" + valorIof
         + ", dataHoraQuitacao=" + dataHoraQuitacao + ", dataHoraCancelamento=" + dataHoraCancelamento
         + ", dataHoraVencParcela=" + dataHoraVencParcela + ", dataHoraDeclinio=" + dataHoraDeclinio
         + ", dataHoraAssinatura=" + dataHoraAssinatura + ", dataHoraAverbacao=" + dataHoraAverbacao
@@ -1103,9 +1104,9 @@ public class Contrato {
         + ", dataHoraReferencia=" + dataHoraReferencia + ", dataHoraAtualizacao=" + dataHoraAtualizacao + ", email="
         + email + ", telefone=" + telefone + ", endereco=" + endereco + ", bairro=" + bairro + ", uf=" + uf
         + ", cidade=" + cidade + ", cep=" + cep + ", nomePessoa=" + nomePessoa + ", desSegmento=" + desSegmento
-        + ", desDiretoria=" + desDiretoria + ", desGrupo=" + desGrupo + ", codigoOperContrato=" + codigoOperContrato
+        + ", desDiretoria=" + desDiretoria + ", desGrupo=" + desGrupo + ", codigoOperContrato=" + codOperContrato
         + ", desOperContrato=" + desOperContrato + ", tipoPessoa=" + tipoPessoa + ", codigoTipoRelacionamento="
-        + codigoTipoRelacionamento + "]";
+        + codTipoRelacionamento + "]";
   }
 
 }

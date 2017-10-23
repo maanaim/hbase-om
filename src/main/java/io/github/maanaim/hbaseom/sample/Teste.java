@@ -24,6 +24,10 @@ public class Teste {
     this.telefone = telefone;
   }
 
+  public Teste(String string) {
+    this.nome = string;
+  }
+
   public String getId() {
     return id;
   }

@@ -48,6 +48,7 @@ public class TestHBase2 {
     TesteDao dao = new TesteDao();
     dao.setTable(table);
     List<Teste> contratos = dao.search(new Teste("Anderson Lobo Feitosa", "(61)98157-2059"));
+//    List<Teste> contratos = dao.search("1");
     contratos.forEach(a -> System.out.println(a.toString()));
     System.out.println("Time to search and create objects: " + (System.currentTimeMillis()-startTime));
   }
