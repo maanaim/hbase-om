@@ -3,9 +3,9 @@ package io.github.maanaim.hbaseom.dao;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
+import io.github.maanaim.hbaseom.annotation.HBaseArrayColumnFamily;
 import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
@@ -149,6 +149,18 @@ public abstract class AbstractHBaseDao<E> {
           d = columnConversor.convert(fieldNameType, value, hbaseAnnotation.format());
         }
 
+        // For HBaseArrayColumnFamily annotation
+        // @TODO: adds an Exception when the type type isn't a Map
+        if ( field.isAnnotationPresent(HBaseArrayColumnFamily.class) ) {
+
+          HBaseArrayColumnFamily hbaseAnnotation = field.getAnnotation(HBaseArrayColumnFamily.class);
+          byte[] familyConverted = HBaseConversor.convertStringToBytes(hbaseAnnotation.family());
+
+          NavigableMap<byte[], byte[]> familyMap = result.getFamilyMap(familyConverted);
+
+          d = this.iterateOverFamilyMap( familyMap, Collections.emptyMap() );
+        }
+
         boolean accessible = field.isAccessible();
         field.setAccessible(true);
         field.set(typeGeneric, d);
@@ -161,6 +173,34 @@ public abstract class AbstractHBaseDao<E> {
     
     return typeGeneric;
   }
+
+  /**
+   * Iterates over a FamilyMap, converts the values and returns a Map<String, String>
+   *
+   * @param navMap: NavigableMap<byte[], byte[]>
+   * @param accumulator: Map<String,String>
+   *
+   * @return Returns a column/value map with all byte array values converted to String
+   * */
+  private Map<String, String> iterateOverFamilyMap(
+          NavigableMap<byte[], byte[]> navMap,
+          Map<String,String> accumulator
+  ) {
+
+    if ( navMap.isEmpty() )
+      return accumulator;
+    else {
+      Map.Entry<byte[], byte[]> entry = navMap.pollFirstEntry();
+
+      String key = entry.getKey().toString();
+      String value = entry.getValue().toString();
+
+      accumulator.put(key, value);
+      return iterateOverFamilyMap( navMap, accumulator );
+    }
+
+  }
+
 
   @SuppressWarnings("unused")
   // TODO Temporariamente inutilizado após mudança de estratégia 
