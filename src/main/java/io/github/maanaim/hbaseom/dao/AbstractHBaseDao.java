@@ -6,6 +6,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 import io.github.maanaim.hbaseom.annotation.HBaseArrayColumnFamily;
+import io.github.maanaim.hbaseom.converter.exceptions.WrongAttributeTypeException;
 import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
@@ -57,7 +58,7 @@ public abstract class AbstractHBaseDao<E> {
       Get getByKey = new Get(HBaseConversor.convertStringToBytes(key));
       Result result = getTable().get(getByKey);
       object = createEntity(result);
-    } catch (IOException e) {
+    } catch (WrongAttributeTypeException | IOException e) {
       throw new DataAccessObjectException(e);
     }
     
@@ -71,7 +72,11 @@ public abstract class AbstractHBaseDao<E> {
       scan.setRowPrefixFilter(HBaseConversor.convertStringToBytes(prefixKey));
       ResultScanner resultScanner = getTable().getScanner(scan);
       resultScanner.forEach( result -> {
-        objects.add(createEntity(result));
+        try {
+          objects.add(createEntity(result));
+        } catch ( WrongAttributeTypeException e) {
+          throw new RuntimeException(e);
+        }
       });
     } catch (IOException e) {
       throw new DataAccessObjectException(e);
@@ -113,7 +118,11 @@ public abstract class AbstractHBaseDao<E> {
       scan.setFilter(filterList);
       ResultScanner resultScanner = getTable().getScanner(scan);
       resultScanner.forEach( result -> {
-        objects.add(createEntity(result));
+        try {
+          objects.add(createEntity(result));
+        } catch ( WrongAttributeTypeException e) {
+          throw new RuntimeException(e);
+        }
       });
       
     } catch (IOException | IllegalArgumentException | IllegalAccessException e) {
@@ -123,7 +132,7 @@ public abstract class AbstractHBaseDao<E> {
     return objects;
   }
   
-  private E createEntity(Result result) {
+  private E createEntity(Result result) throws WrongAttributeTypeException {
     E typeGeneric = null;
     IContextConversor rowKeyConversor = new HBaseRowKeyContextConversor();
     IContextConversor columnConversor = new HBaseColumnContextConversor();
@@ -150,15 +159,22 @@ public abstract class AbstractHBaseDao<E> {
         }
 
         // For HBaseArrayColumnFamily annotation
-        // @TODO: adds an Exception when the type type isn't a Map
         if ( field.isAnnotationPresent(HBaseArrayColumnFamily.class) ) {
+
+          String mapClassName = Map.class.getName();
+          if ( fieldNameType != mapClassName )
+            throw new WrongAttributeTypeException(mapClassName, fieldNameType );
 
           HBaseArrayColumnFamily hbaseAnnotation = field.getAnnotation(HBaseArrayColumnFamily.class);
           byte[] familyConverted = HBaseConversor.convertStringToBytes(hbaseAnnotation.family());
 
           NavigableMap<byte[], byte[]> familyMap = result.getFamilyMap(familyConverted);
 
-          d = this.iterateOverFamilyMap( familyMap, Collections.emptyMap() );
+          d = this.iterateOverFamilyMap(
+                  hbaseAnnotation.qualifierType(),
+                  hbaseAnnotation.valueType(),
+                  familyMap,
+                  new HashMap<>() );
         }
 
         boolean accessible = field.isAccessible();
@@ -183,6 +199,8 @@ public abstract class AbstractHBaseDao<E> {
    * @return Returns a column/value map with all byte array values converted to String
    * */
   private Map<String, String> iterateOverFamilyMap(
+          String qualifierFieldType,
+          String valueFieldType,
           NavigableMap<byte[], byte[]> navMap,
           Map<String,String> accumulator
   ) {
@@ -190,13 +208,15 @@ public abstract class AbstractHBaseDao<E> {
     if ( navMap.isEmpty() )
       return accumulator;
     else {
+      IContextConversor rowKeyConversor = new HBaseRowKeyContextConversor();
+
       Map.Entry<byte[], byte[]> entry = navMap.pollFirstEntry();
 
-      String key = entry.getKey().toString();
-      String value = entry.getValue().toString();
+      String key = rowKeyConversor.convert(qualifierFieldType,entry.getKey()).toString();
+      String value = rowKeyConversor.convert(valueFieldType,entry.getValue()).toString();
 
       accumulator.put(key, value);
-      return iterateOverFamilyMap( navMap, accumulator );
+      return iterateOverFamilyMap( qualifierFieldType, valueFieldType, navMap, accumulator );
     }
 
   }

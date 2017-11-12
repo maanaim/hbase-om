@@ -23,11 +23,21 @@ public @interface HBaseArrayColumnFamily {
     String family();
 
     /**
+     * The type to convert qualifier value
+     * */
+    String qualifierType() default "String";
+
+    /**
      * Main format to convert the qualifier data
      *
      * @var io.github.maanaim.hbaseom.mapper.HBaseFormat
      * */
     HBaseFormat qualifierFormat() default HBaseFormat.DEFAULT;
+
+    /**
+     * The type to convert the value
+     * */
+    String valueType() default "String";
 
     /**
      * Main format to convert the value data
