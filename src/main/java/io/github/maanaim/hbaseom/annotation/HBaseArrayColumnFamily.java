@@ -18,31 +18,41 @@ public @interface HBaseArrayColumnFamily {
     /**
      * String used to load the column family
      *
-     * @var String family
+     * String family
+     *
+     * @return String
      * */
     String family();
 
     /**
      * The type to convert qualifier value
+     *
+     * @return String
      * */
     String qualifierType() default "String";
 
     /**
      * Main format to convert the qualifier data
      *
-     * @var io.github.maanaim.hbaseom.mapper.HBaseFormat
+     * io.github.maanaim.hbaseom.mapper.HBaseFormat
+     *
+     * @return HBaseFormat
      * */
     HBaseFormat qualifierFormat() default HBaseFormat.DEFAULT;
 
     /**
      * The type to convert the value
+     *
+     * @return String
      * */
     String valueType() default "String";
 
     /**
      * Main format to convert the value data
      *
-     * @var io.github.maanaim.hbaseom.mapper.HBaseFormat
+     * io.github.maanaim.hbaseom.mapper.HBaseFormat
+     *
+     * @return HBaseFormat
      * */
     HBaseFormat valueFormat() default HBaseFormat.DEFAULT;
 
