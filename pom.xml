@@ -4,7 +4,7 @@
 
   <groupId>io.github.maanaim</groupId>
   <artifactId>hbase-om</artifactId>
-  <version>1.4.0</version>
+  <version>1.4.1-SNAPSHOT</version>
   <name>HBase Object Mapper</name>
   <description>A little Java-annotation based compact utility library for HBase that helps you:
     [1] convert objects of your bean-like classes to HBase rows.
@@ -25,7 +25,7 @@
     <connection>scm:git:git://github.com/maanaim/hbase-om.git</connection>
     <developerConnection>scm:git:git@github.com:maanaim/hbase-om.git</developerConnection>
     <url>https://github.com/maanaim/hbase-om</url>
-    <tag>hbase-om-1.4.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <licenses>
