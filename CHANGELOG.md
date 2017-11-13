@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Mask to zip code, e-mail, money
 - Map fields to enum
 
+## [1.4.0] - 2017-11-13
+### Added
+- Map fields to key and value maps.
+
 ## [1.3.0] - 2017-09-28
 ### Added
 - Search by QBE (Query by Example)
